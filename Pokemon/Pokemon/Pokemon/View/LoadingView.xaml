@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<StackLayout
+    x:Class="Pokemon.View.LoadingView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+        <BoxView
+            BackgroundColor="#000"
+            HorizontalOptions="FillAndExpand"
+            Opacity="0.7"
+            VerticalOptions="FillAndExpand" />
+        <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+            <Image
+                x:Name="imageLoading"
+                HeightRequest="100"
+                HorizontalOptions="CenterAndExpand"
+                Source="pokebola.png"
+                VerticalOptions="CenterAndExpand" />
+            <Label
+                HorizontalOptions="Center"
+                Text="Aguarde..."
+                TextColor="#fff" />
+        </StackLayout>
+    </Grid>
+</StackLayout>

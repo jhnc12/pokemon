@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Pokemon.View.EditarItemView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    BackgroundColor="#fff">
+    <NavigationPage.TitleView>
+        <Grid HorizontalOptions="FillAndExpand">
+            <Image
+                Margin="-80,0,0,0"
+                HeightRequest="50"
+                HorizontalOptions="Center"
+                Source="logo.png" />
+        </Grid>
+    </NavigationPage.TitleView>
+    <ContentPage.Content>
+        <StackLayout Padding="16">
+            <Frame
+                Grid.Column="0"
+                Padding="0"
+                BackgroundColor="Gray"
+                CornerRadius="50"
+                HasShadow="False"
+                HeightRequest="100"
+                HorizontalOptions="Center"
+                IsClippedToBounds="True"
+                WidthRequest="100">
+                <Image Source="{Binding Image}">
+                    <Image.Triggers>
+                        <DataTrigger
+                            Binding="{Binding Image, TargetNullValue=''}"
+                            TargetType="Image"
+                            Value="">
+                            <Setter Property="Source" Value="pokebola.png" />
+                        </DataTrigger>
+                    </Image.Triggers>
+                </Image>
+            </Frame>
+            <Label
+                Margin="0,20,0,0"
+                Text="INSIRA A URL DA IMAGEM"
+                TextColor="#000" />
+            <Entry
+                HorizontalOptions="FillAndExpand"
+                Placeholder="URL da Imagem"
+                Text="{Binding Image}" />
+            <Label
+                Margin="0,20,0,0"
+                Text="NOME DO POKÉMON"
+                TextColor="#000" />
+            <Entry
+                HorizontalOptions="FillAndExpand"
+                Placeholder="Nome do Pókémon"
+                Text="{Binding Name}"
+                TextTransform="Lowercase" />
+            <Label
+                Margin="0,20,0,0"
+                Text="ANOTAÇÕES SOBRE O POKÉMON"
+                TextColor="#000" />
+            <Editor
+                HorizontalOptions="FillAndExpand"
+                Placeholder="ANOTAÇÕES"
+                Text="{Binding Anotation}"
+                VerticalOptions="FillAndExpand" />
+            <Button
+                Padding="30,10"
+                Command="{Binding UpdateCommand}"
+                HorizontalOptions="CenterAndExpand"
+                Text="SALVAR"
+                TextColor="Blue" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Pokemon.View.PokemonsView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:contentview="clr-namespace:Pokemon.View"
+    x:Name="pokemonPage"
+    BackgroundColor="#fff">
+    <NavigationPage.TitleView>
+        <Grid HorizontalOptions="FillAndExpand">
+            <Image
+                Margin="-30,0,0,0"
+                HeightRequest="50"
+                HorizontalOptions="Center"
+                Source="logo.png" />
+        </Grid>
+    </NavigationPage.TitleView>
+    <ContentPage.Content>
+        <Grid>
+            <StackLayout
+                Padding="16"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="FillAndExpand">
+                <ListView
+                    HasUnevenRows="True"
+                    HorizontalOptions="FillAndExpand"
+                    ItemsSource="{Binding ListPokemon}"
+                    VerticalOptions="FillAndExpand">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Grid
+                                    Padding="0,10"
+                                    HorizontalOptions="FillAndExpand"
+                                    VerticalOptions="FillAndExpand">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="60" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <Frame
+                                        Grid.Column="0"
+                                        Padding="0"
+                                        BackgroundColor="Gray"
+                                        CornerRadius="30"
+                                        HasShadow="False"
+                                        HeightRequest="60"
+                                        HorizontalOptions="Center"
+                                        IsClippedToBounds="True"
+                                        WidthRequest="60">
+                                        <Image Source="{Binding image}">
+                                            <Image.Triggers>
+                                                <DataTrigger
+                                                    Binding="{Binding image, TargetNullValue=''}"
+                                                    TargetType="Image"
+                                                    Value="">
+                                                    <Setter Property="Source" Value="pokebola.png" />
+                                                </DataTrigger>
+                                            </Image.Triggers>
+                                        </Image>
+                                    </Frame>
+                                    <Label
+                                        Grid.Column="1"
+                                        Margin="10,0,0,0"
+                                        FontSize="Medium"
+                                        Text="{Binding name}"
+                                        TextColor="#000"
+                                        TextTransform="Uppercase"
+                                        VerticalOptions="CenterAndExpand" />
+                                    <Image
+                                        Grid.Column="2"
+                                        Margin="0,0,5,0"
+                                        HeightRequest="25"
+                                        Source="editar.png"
+                                        VerticalOptions="CenterAndExpand">
+                                        <Image.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding Path=BindingContext.EditCommand, Source={x:Reference pokemonPage}}" CommandParameter="{Binding .}" />
+                                        </Image.GestureRecognizers>
+                                    </Image>
+                                    <Image
+                                        Grid.Column="3"
+                                        Margin="5,0,0,0"
+                                        HeightRequest="25"
+                                        Source="excluir.png"
+                                        VerticalOptions="CenterAndExpand">
+                                        <Image.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding Path=BindingContext.DeleteCommand, Source={x:Reference pokemonPage}}" CommandParameter="{Binding .}" />
+                                        </Image.GestureRecognizers>
+                                    </Image>
+                                    <Grid.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding Path=BindingContext.DetailCommand, Source={x:Reference pokemonPage}}" CommandParameter="{Binding .}" />
+                                    </Grid.GestureRecognizers>
+                                </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
+            <contentview:ExcluirItemView IsVisible="{Binding PopupExcluirVisivel}" />
+            <contentview:LoadingView IsVisible="{Binding LoadingVisivel}" />
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

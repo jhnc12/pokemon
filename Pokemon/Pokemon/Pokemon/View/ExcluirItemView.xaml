@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<StackLayout
+    x:Class="Pokemon.View.ExcluirItemView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Name="excluirPage">
+    <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+        <BoxView
+            BackgroundColor="#000"
+            HorizontalOptions="FillAndExpand"
+            Opacity="0.6"
+            VerticalOptions="FillAndExpand" />
+        <Frame
+            Padding="16"
+            BackgroundColor="#fff"
+            CornerRadius="10"
+            HorizontalOptions="Center"
+            VerticalOptions="Center"
+            WidthRequest="300">
+            <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
+                <Frame
+                    Grid.Column="0"
+                    Padding="0"
+                    BackgroundColor="Gray"
+                    CornerRadius="50"
+                    HasShadow="False"
+                    HeightRequest="100"
+                    HorizontalOptions="Center"
+                    IsClippedToBounds="True"
+                    WidthRequest="100">
+                    <Image Source="{Binding LastSelection.image}">
+                        <Image.Triggers>
+                            <DataTrigger
+                                Binding="{Binding LastSelection.image, TargetNullValue=''}"
+                                TargetType="Image"
+                                Value="">
+                                <Setter Property="Source" Value="pokebola.png" />
+                            </DataTrigger>
+                        </Image.Triggers>
+                    </Image>
+                </Frame>
+                <Label
+                    FontSize="Medium"
+                    HorizontalOptions="Center"
+                    Text="{Binding LastSelection.name}"
+                    TextTransform="Uppercase" />
+                <Grid Margin="0,20,0,0" HorizontalOptions="Center">
+                    <Label
+                        Grid.Column="0"
+                        FontSize="Medium"
+                        HorizontalOptions="Center"
+                        Text="CANCELAR"
+                        TextColor="Blue">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding Path=BindingContext.CloseDeleteCommand, Source={x:Reference excluirPage}}" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <Label
+                        Grid.Column="1"
+                        FontSize="Medium"
+                        HorizontalOptions="Center"
+                        Text="EXCLUIR"
+                        TextColor="Red">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding Path=BindingContext.ExcludItemCommand, Source={x:Reference excluirPage}}" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                </Grid>
+            </StackLayout>
+        </Frame>
+    </Grid>
+</StackLayout>

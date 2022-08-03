@@ -1,0 +1,157 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Pokemon.View.DetailView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:contentview="clr-namespace:Pokemon.View"
+    BackgroundColor="#fff">
+    <NavigationPage.TitleView>
+        <Grid HorizontalOptions="FillAndExpand">
+            <Image
+                Margin="-80,0,0,0"
+                HeightRequest="50"
+                HorizontalOptions="Center"
+                Source="logo.png" />
+        </Grid>
+    </NavigationPage.TitleView>
+    <ContentPage.Content>
+        <ScrollView VerticalOptions="FillAndExpand">
+            <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                <StackLayout Padding="16">
+                    <Frame
+                    Grid.Column="0"
+                    Padding="0"
+                    BackgroundColor="Gray"
+                    CornerRadius="50"
+                    HasShadow="False"
+                    HeightRequest="100"
+                    HorizontalOptions="Center"
+                    IsClippedToBounds="True"
+                    WidthRequest="100">
+                        <Image Source="{Binding Image}">
+                            <Image.Triggers>
+                                <DataTrigger
+                                Binding="{Binding Image, TargetNullValue=''}"
+                                TargetType="Image"
+                                Value="">
+                                    <Setter Property="Source" Value="pokebola.png" />
+                                </DataTrigger>
+                            </Image.Triggers>
+                        </Image>
+                    </Frame>
+
+                    <Label
+                    Margin="0,20,0,0"
+                    Text="NOME DO POKÉMON"
+                    TextColor="#000" />
+                    <Label
+                    HorizontalOptions="FillAndExpand"
+                    Text="{Binding Name}"
+                    TextColor="DarkGray"
+                    TextTransform="Lowercase" />
+                    <Label
+                    Margin="0,20,0,0"
+                    Text="ANOTAÇÕES SOBRE O POKÉMON"
+                    TextColor="#000" />
+                    <Label
+                    HorizontalOptions="FillAndExpand"
+                    Text="{Binding Anotation}"
+                    TextColor="DarkGray"
+                    VerticalOptions="StartAndExpand" />
+                    <Label
+                    Margin="0,20,0,0"
+                    Text="ESPÉCIE"
+                    TextColor="#000" />
+                    <BoxView
+                    BackgroundColor="LightGray"
+                    HeightRequest="1"
+                    HorizontalOptions="FillAndExpand" />
+                    <Label
+                    HorizontalOptions="FillAndExpand"
+                    Text="{Binding Details.species.name}"
+                    TextColor="DarkGray"
+                    VerticalOptions="Start" />
+                    <Label
+                    Margin="0,20,0,0"
+                    Text="TIPO"
+                    TextColor="#000" />
+                    <BoxView
+                    BackgroundColor="LightGray"
+                    HeightRequest="1"
+                    HorizontalOptions="FillAndExpand" />
+                    <ListView
+                    HasUnevenRows="True"
+                    HeightRequest="20"
+                    HorizontalOptions="FillAndExpand"
+                    ItemsSource="{Binding Details.types}"
+                    SeparatorVisibility="None"
+                    VerticalOptions="Start">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <Grid>
+                                        <Label
+                                        Margin="5,0"
+                                        Text="{Binding type.name}"
+                                        TextColor="DarkGray" />
+                                    </Grid>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                    <Label
+                    Margin="0,20,0,0"
+                    Text="HABILIDADES"
+                    TextColor="#000" />
+                    <BoxView
+                    BackgroundColor="LightGray"
+                    HeightRequest="1"
+                    HorizontalOptions="FillAndExpand" />
+                    <ListView
+                    HasUnevenRows="True"
+                    HeightRequest="40"
+                    HorizontalOptions="FillAndExpand"
+                    ItemsSource="{Binding Details.abilities}"
+                    SeparatorVisibility="None"
+                    VerticalOptions="Start">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <Grid>
+                                        <Label
+                                        Margin="5,0"
+                                        Text="{Binding ability.name}"
+                                        TextColor="DarkGray" />
+                                    </Grid>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                    <Label
+                    Margin="0,20,0,0"
+                    Text="IMAGENS"
+                    TextColor="#000" />
+                    <Grid>
+                        <Image
+                        Grid.Column="0"
+                        HeightRequest="100"
+                        Source="{Binding Details.sprites.front_default}" />
+                        <Image
+                        Grid.Column="1"
+                        HeightRequest="100"
+                        Source="{Binding Details.sprites.back_default}" />
+                        <Image
+                        Grid.Column="2"
+                        HeightRequest="100"
+                        Source="{Binding Details.sprites.front_shiny}" />
+                        <Image
+                        Grid.Column="3"
+                        HeightRequest="100"
+                        Source="{Binding Details.sprites.back_shiny}" />
+                    </Grid>
+
+                </StackLayout>
+                <contentview:LoadingView IsVisible="{Binding LoadingVisivel}" />
+            </Grid>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

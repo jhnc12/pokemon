@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Pokemon.MainPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    <StackLayout Margin="20,35,20,20">
+        <Entry x:Name="nameEntry" Placeholder="Enter name" />
+        <CheckBox x:Name="subscribed" />
+      
+        <CollectionView
+            x:Name="collectionView"
+            SelectionMode="Single">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <StackLayout>
+                        <Label FontSize="Medium" Text="{Binding Name}" />
+                        <Label
+                            FontSize="Small"
+                            Text="{Binding Subscribed}"
+                            TextColor="Silver" />
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </StackLayout>
+
+</ContentPage>
